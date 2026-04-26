@@ -12,5 +12,15 @@ public class BookingManager {
         this.paymentGateway = paymentGateway;
         this.notificationService = notificationService;
         this.eventRepository = eventRepository;
+
+    }
+
+    public void book(String eventId, double amount) {
+        if (eventId == null || eventId.isEmpty() || amount <= 0) {
+            return;
+        }
+        if (eventRepository.isSoldOut(eventId)) {
+            return;
+        }
     }
 }
