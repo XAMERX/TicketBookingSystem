@@ -22,5 +22,11 @@ public class BookingManager {
         if (eventRepository.isSoldOut(eventId)) {
             return;
         }
+
+        String transactionId = paymentGateway.processPayment(amount);
+
+        eventRepository.saveBooking(eventId);
+
+        notificationService.sendConfirmation("Booking successful. Transaction ID: " + transactionId);
     }
 }
